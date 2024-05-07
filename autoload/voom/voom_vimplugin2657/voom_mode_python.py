@@ -36,9 +36,11 @@ def hook_makeOutline(VO, blines):
         #traceback.print_exc()  --this goes to sys.stderr
         #print traceback.format_exc() --ok but no highlighting
         lines = traceback.format_exc().replace("'","''").split('\n')
-        for ln in lines:
-            vim.command("call voom#ErrorMsg('%s')" %ln)
-        return (['= |!!!ERROR: OUTLINE IS INVALID'], [1], [1])
+        # for ln in lines:
+        #     vim.command("call voom#ErrorMsg('%s')" %ln)
+        
+        lines = ['= |!!!ERROR: OUTLINE IS INVALID','','Check for Python syntax errors']+lines
+        return (lines, [1]*len(lines), [1]*len(lines))
 
     isHead = False # True if current line is a headline
     indents = [0,] # indents of previous levels
